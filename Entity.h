@@ -8,7 +8,7 @@ private:
 	int height;
 
 public:
-	Entity(float x, float y, int width, int height);
+	Entity(float newX, float newY, int newWidth, int newHeight);
 
 	float getX();
 	float getY();

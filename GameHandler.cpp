@@ -24,6 +24,8 @@ void draw() {
 
 }
 
+
+
 GameHandler* GameHandler::gameHandler_instance = 0;
 
 GameHandler* GameHandler::getInstance() {
