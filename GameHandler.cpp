@@ -22,7 +22,7 @@ void GameHandler::startGame() {
 }
 
 //draw entities.
-void draw() {
+void GameHandler::draw() {
 	for (int i = 0; i < 1; i++)
 	{
 
@@ -30,7 +30,7 @@ void draw() {
 }
 
 //update entities.
-void update() {
+void GameHandler::update() {
 	for (int i = 0; i < 5; i++)
 	{
 
@@ -40,6 +40,10 @@ void update() {
 
 
 GameHandler* GameHandler::gameHandler_instance = 0;
+
+void GameHandler::update()
+{
+}
 
 GameHandler* GameHandler::getInstance() {
 	if (!gameHandler_instance)

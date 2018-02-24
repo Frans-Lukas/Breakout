@@ -13,4 +13,6 @@ public:
 	float getY();
 	int getWidth();
 	int getHeight();
+	void setX();
+	void setY();
 };
