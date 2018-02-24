@@ -9,6 +9,7 @@ public:
 	GameHandler();
 	void startGame();
 	void draw();
+	void update();
 	static GameHandler *getInstance();
 	virtual ~GameHandler();
 };

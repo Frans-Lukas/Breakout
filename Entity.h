@@ -9,7 +9,6 @@ private:
 
 public:
 	Entity(float newX, float newY, int newWidth, int newHeight);
-
 	float getX();
 	float getY();
 	int getWidth();

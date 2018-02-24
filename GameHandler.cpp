@@ -15,13 +15,26 @@ void GameHandler::startGame() {
 		}
 		window.clear();
 		// Draw stuff
+		update();
 		draw();
 		window.display();
 	}
 }
 
+//draw entities.
 void draw() {
+	for (int i = 0; i < 1; i++)
+	{
 
+	}
+}
+
+//update entities.
+void update() {
+	for (int i = 0; i < 5; i++)
+	{
+
+	}
 }
 
 
