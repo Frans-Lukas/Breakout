@@ -1,6 +1,5 @@
 #include "Player.h"
 
-
 int Player::getLife() {
 	return lifeLeft;
 }

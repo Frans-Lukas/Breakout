@@ -1,12 +1,18 @@
 #include "GameHandler.h"
 #include <iostream>
 
+#define WINDOW_WIDTH 200
+#define WINDOW_HEIGHT 200
+#define FRAME_LIMIT 60
 
 GameHandler::GameHandler() {
-	window.create(sf::VideoMode(200, 200), "test");
+	window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "test");
+	window.setFramerateLimit(FRAME_LIMIT);
 }
 
 void GameHandler::startGame() {
+
+
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -20,6 +26,8 @@ void GameHandler::startGame() {
 		window.display();
 	}
 }
+
+
 
 //draw entities.
 void GameHandler::draw() {
@@ -37,13 +45,7 @@ void GameHandler::update() {
 	}
 }
 
-
-
 GameHandler* GameHandler::gameHandler_instance = 0;
-
-void GameHandler::update()
-{
-}
 
 GameHandler* GameHandler::getInstance() {
 	if (!gameHandler_instance)

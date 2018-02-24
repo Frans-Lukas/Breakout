@@ -25,8 +25,8 @@ private:
 	sf::RenderWindow window;
 	
 	std::vector<Block> blocksVector;
-	std::vector<Ball> blocksVector;
-	Player player;
+	std::vector<Ball> ballsVector;
+	//Player player;
 
 
 	static GameHandler *gameHandler_instance;
@@ -36,5 +36,5 @@ public:
 	void draw();
 	void update();
 	static GameHandler *getInstance();
-	virtual ~GameHandler();
+	//virtual ~GameHandler();
 };
