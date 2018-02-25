@@ -20,14 +20,13 @@ void GameHandler::startGame() {
 				window.close();
 		}
 		window.clear();
-		// Draw stuff
+		// Draw & update entities.
 		update();
 		draw();
+
 		window.display();
 	}
 }
-
-
 
 //draw entities.
 void GameHandler::draw() {

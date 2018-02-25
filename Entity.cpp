@@ -19,3 +19,13 @@ int Entity::getWidth() {
 int Entity::getHeight() {
 	return height;
 }
+
+void Entity::setX(float newX)
+{
+	x = newX;
+}
+
+void Entity::setY(float newY)
+{
+	y = newY;
+}

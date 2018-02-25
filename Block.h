@@ -5,7 +5,7 @@ class Block: public Entity{
 private:
 	int lifeLeft;
 public:
-	Block(int lifeLeft);
+	Block(int newLifeLeft);
 	int getLifeLeft();
 	void decrementLifeLeft();
 };
