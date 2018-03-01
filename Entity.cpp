@@ -20,12 +20,12 @@ int Entity::getHeight() {
 	return height;
 }
 
-void Entity::setX(float newX)
+void Entity::setX(int newX)
 {
 	x = newX;
 }
 
-void Entity::setY(float newY)
+void Entity::setY(int newY)
 {
 	y = newY;
 }

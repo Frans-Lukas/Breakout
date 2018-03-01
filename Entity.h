@@ -14,6 +14,6 @@ public:
 	int getY();
 	int getWidth();
 	int getHeight();
-	void setX(float newX);
-	void setY(float newY);
+	void setX(int newX);
+	void setY(int newY);
 };

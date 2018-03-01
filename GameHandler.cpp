@@ -58,8 +58,8 @@ void GameHandler::draw() {
 			++blockIterator){
 		
 		blockRS.setFillColor(sf::Color::Red);
-		blockRS.setPosition(blockIterator->getX, 
-							blockIterator->getY);
+		blockRS.setPosition(blockIterator->getX(), 
+							blockIterator->getY());
 		window.draw(blockRS);
 
 	}
