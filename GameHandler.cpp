@@ -52,3 +52,7 @@ GameHandler* GameHandler::getInstance() {
 		
 	return gameHandler_instance;
 }
+
+GameHandler::~GameHandler()
+{
+}
