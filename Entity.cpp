@@ -1,6 +1,5 @@
 #include "Entity.h"
 
-
 Entity::Entity(int newX, int newY, int newWidth, int newHeight) :
 		x(newX), y(newY), width(newWidth), height(newHeight){}
 

@@ -1,5 +1,11 @@
 #pragma once
+
+#ifndef SFML_GRAPHICS
+#define SFML_GRAPHICS
+
 #include <SFML/Graphics.hpp>
+#endif // !SFML_GRAPHICS
+
 
 #ifndef VECTOR_INCLUDE
 #define VECTOR_INCLUDE

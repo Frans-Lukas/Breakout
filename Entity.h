@@ -1,5 +1,12 @@
 #pragma once
 
+
+#ifndef SFML_GRAPHICS
+#define SFML_GRAPHICS
+#include <SFML/Graphics.hpp>
+#endif // !SFML_GRAPHICS
+
+
 class Entity {
 private:
 	int x;

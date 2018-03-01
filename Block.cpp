@@ -12,6 +12,14 @@ int Block::getLifeLeft()
 	return lifeLeft;
 }
 
+sf::Color Block::getColor() {
+	return sf::Color();
+}
+
+void Block::setColor(sf::Color color){
+	this->color = color;
+}
+
 void Block::decrementLifeLeft()
 {
 	lifeLeft--;
