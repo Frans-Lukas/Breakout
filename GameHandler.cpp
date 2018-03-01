@@ -7,34 +7,23 @@
 #define NUM_BLOCKS_HEIGHT 16
 #define NUM_BLOCKS_WIDTH 8
 #define EASY_BLOCK_LIFE 1
+#define PLAYER_START_Y 100
+
+
 
 GameHandler::GameHandler() {
 	// init window.
 	window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "test");
 	window.setFramerateLimit(FRAME_LIMIT);
 	
-	//calculate size of blocks
-	blockHeight = WINDOW_HEIGHT / (NUM_BLOCKS_HEIGHT * 2);
-	blockWidth = WINDOW_WIDTH / (NUM_BLOCKS_WIDTH);
-	blockRS.setSize(sf::Vector2f(blockWidth, blockHeight));
 
-	//reserver size for blocks
-	blocksVector.reserve(NUM_BLOCKS_WIDTH * NUM_BLOCKS_HEIGHT);
+	blockHeight = WINDOW_HEIGHT / (NUM_BLOCKS_HEIGHT * 1.5);
+	blockWidth = WINDOW_WIDTH / (NUM_BLOCKS_WIDTH);
 
 	//Add blocks to vector
-	for (int i = 0; i < NUM_BLOCKS_HEIGHT / 2; i++){
-		for (int j = 0; j < NUM_BLOCKS_WIDTH; j++){
-			Block newBlock(j*blockWidth, i*blockHeight, 
-				blockWidth, blockHeight, EASY_BLOCK_LIFE);
-			newBlock.setColor(sf::Color(
-					(255 / NUM_BLOCKS_HEIGHT * i),
-					(255 / NUM_BLOCKS_WIDTH * j),
-					(255 / (NUM_BLOCKS_WIDTH + NUM_BLOCKS_HEIGHT) * (i + j))
-				)
-			);
-			blocksVector.push_back(newBlock);
-		}
-	}
+	setUpBlockVector();
+	setUpPlayer();
+	setUpBallVector();
 }
 
 void GameHandler::startGame() {
@@ -57,8 +46,8 @@ void GameHandler::startGame() {
 
 //draw entities.
 void GameHandler::draw() {
-	//draw blocks
 	
+	//draw blocks
 	for (blockIterator = blocksVector.begin(); 
 			blockIterator != blocksVector.end(); 
 			++blockIterator){
@@ -67,8 +56,9 @@ void GameHandler::draw() {
 		blockRS.setPosition(blockIterator->getX(), 
 							blockIterator->getY());
 		window.draw(blockRS);
-
 	}
+
+
 }
 
 //update entities.
@@ -90,4 +80,45 @@ GameHandler* GameHandler::getInstance() {
 
 GameHandler::~GameHandler()
 {
+}
+
+
+
+
+void GameHandler::setUpBlockVector() {
+	//calculate size of blocks
+	blockRS.setSize(sf::Vector2f(blockWidth, blockHeight));
+
+	//reserver size for blocks
+	blocksVector.reserve(NUM_BLOCKS_WIDTH * NUM_BLOCKS_HEIGHT);
+
+	for (int i = 0; i < NUM_BLOCKS_HEIGHT / 2; i++) {
+		for (int j = 0; j < NUM_BLOCKS_WIDTH; j++) {
+			Block newBlock(j*blockWidth, i*blockHeight,
+				blockWidth, blockHeight, EASY_BLOCK_LIFE);
+			newBlock.setColor(sf::Color(
+				(255 / NUM_BLOCKS_HEIGHT * i),
+				(255 / NUM_BLOCKS_WIDTH * j),
+				(255 / (NUM_BLOCKS_WIDTH + NUM_BLOCKS_HEIGHT) * (i + j))
+			)
+			);
+			blocksVector.push_back(newBlock);
+		}
+	}
+}
+
+void GameHandler::setUpPlayer() {
+	player = new Player(WINDOW_WIDTH / 2, 
+		PLAYER_START_Y, 
+		WINDOW_WIDTH / 4, 
+		blockHeight);
+}
+
+void GameHandler::setUpBallVector() {
+}
+
+void GameHandler::drawBlocks() {
+}
+
+void GameHandler::drawBalls() {
 }

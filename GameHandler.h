@@ -36,13 +36,21 @@ private:
 	std::vector<Block> blocksVector;
 	std::vector<Block>::iterator blockIterator;
 	sf::RectangleShape blockRS;
-
-	std::vector<Ball> ballsVector;
-	Player *player;
 	int blockWidth;
 	int blockHeight;
 
+	std::vector<Ball> ballsVector;
+	Player *player;
+
 	static GameHandler *gameHandler_instance;
+
+	void setUpBlockVector();
+	void setUpPlayer();
+	void setUpBallVector();
+
+	void drawBlocks();
+	void drawBalls();
+
 public:
 	GameHandler();
 	void startGame();
