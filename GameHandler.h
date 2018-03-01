@@ -41,6 +41,9 @@ private:
 
 	std::vector<Ball> ballsVector;
 	Player *player;
+	sf::RectangleShape playerRS;
+	int playerWidth;
+	int playerHeight;
 
 	static GameHandler *gameHandler_instance;
 
@@ -50,6 +53,8 @@ private:
 
 	void drawBlocks();
 	void drawBalls();
+
+	void drawRectangle(sf::Color color, int x, int  y, sf::RectangleShape rs);
 
 public:
 	GameHandler();

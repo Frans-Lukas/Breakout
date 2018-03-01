@@ -7,7 +7,7 @@
 #define NUM_BLOCKS_HEIGHT 16
 #define NUM_BLOCKS_WIDTH 8
 #define EASY_BLOCK_LIFE 1
-#define PLAYER_START_Y 100
+#define PLAYER_START_Y WINDOW_HEIGHT - WINDOW_HEIGHT / 6
 
 
 
@@ -48,18 +48,48 @@ void GameHandler::startGame() {
 void GameHandler::draw() {
 	
 	//draw blocks
-	for (blockIterator = blocksVector.begin(); 
-			blockIterator != blocksVector.end(); 
-			++blockIterator){
-		
-		blockRS.setFillColor(blockIterator->getColor());
-		blockRS.setPosition(blockIterator->getX(), 
-							blockIterator->getY());
-		window.draw(blockRS);
-	}
-
+	
+	
+	drawBlocks();
+	drawBalls();
+	
+	//draw player
+	drawRectangle(
+		sf::Color::White,
+		player->getX(),
+		player->getY(),
+		playerRS
+	);
 
 }
+
+
+
+
+void GameHandler::drawBlocks() {
+
+	for (blockIterator = blocksVector.begin();
+			blockIterator != blocksVector.end();
+			++blockIterator) {
+		drawRectangle(
+			blockIterator->getColor(), 
+			blockIterator->getX(),
+			blockIterator->getY(),
+			blockRS
+		);
+	}
+
+}
+
+void GameHandler::drawRectangle(sf::Color color, int x, int  y, sf::RectangleShape rs) {
+	rs.setFillColor(color);
+	rs.setPosition(x, y);
+	window.draw(rs);
+}
+
+void GameHandler::drawBalls() {
+}
+
 
 //update entities.
 void GameHandler::update() {
@@ -108,17 +138,18 @@ void GameHandler::setUpBlockVector() {
 }
 
 void GameHandler::setUpPlayer() {
-	player = new Player(WINDOW_WIDTH / 2, 
-		PLAYER_START_Y, 
-		WINDOW_WIDTH / 4, 
-		blockHeight);
+	playerWidth = WINDOW_WIDTH / 3;
+	playerHeight = WINDOW_HEIGHT / 32;
+
+	player = new Player(WINDOW_WIDTH / 2 - playerWidth / 2, 
+		PLAYER_START_Y,
+		playerWidth, 
+		playerHeight);
+	playerRS.setSize(sf::Vector2f(
+		player->getWidth(), 
+		player->getHeight()));
 }
 
 void GameHandler::setUpBallVector() {
 }
 
-void GameHandler::drawBlocks() {
-}
-
-void GameHandler::drawBalls() {
-}
