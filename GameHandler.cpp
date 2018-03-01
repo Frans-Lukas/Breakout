@@ -14,18 +14,24 @@ GameHandler::GameHandler() {
 	window.setFramerateLimit(FRAME_LIMIT);
 	
 	//calculate size of blocks
-	blockHeight = WINDOW_HEIGHT / NUM_BLOCKS_HEIGHT;
-	blockWidth = WINDOW_WIDTH / NUM_BLOCKS_WIDTH;
+	blockHeight = WINDOW_HEIGHT / (NUM_BLOCKS_HEIGHT * 2);
+	blockWidth = WINDOW_WIDTH / (NUM_BLOCKS_WIDTH);
 	blockRS.setSize(sf::Vector2f(blockWidth, blockHeight));
 
 	//reserver size for blocks
 	blocksVector.reserve(NUM_BLOCKS_WIDTH * NUM_BLOCKS_HEIGHT);
 
 	//Add blocks to vector
-	for (int i = 0; i < NUM_BLOCKS_HEIGHT; i++){
+	for (int i = 0; i < NUM_BLOCKS_HEIGHT / 2; i++){
 		for (int j = 0; j < NUM_BLOCKS_WIDTH; j++){
 			Block newBlock(j*blockWidth, i*blockHeight, 
 				blockWidth, blockHeight, EASY_BLOCK_LIFE);
+			newBlock.setColor(sf::Color(
+					(255 / NUM_BLOCKS_HEIGHT * i),
+					(255 / NUM_BLOCKS_WIDTH * j),
+					(255 / (NUM_BLOCKS_WIDTH + NUM_BLOCKS_HEIGHT) * (i + j))
+				)
+			);
 			blocksVector.push_back(newBlock);
 		}
 	}
@@ -57,7 +63,7 @@ void GameHandler::draw() {
 			blockIterator != blocksVector.end(); 
 			++blockIterator){
 		
-		blockRS.setFillColor(sf::Color::Red);
+		blockRS.setFillColor(blockIterator->getColor());
 		blockRS.setPosition(blockIterator->getX(), 
 							blockIterator->getY());
 		window.draw(blockRS);

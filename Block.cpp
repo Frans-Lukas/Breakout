@@ -13,7 +13,7 @@ int Block::getLifeLeft()
 }
 
 sf::Color Block::getColor() {
-	return sf::Color();
+	return color;
 }
 
 void Block::setColor(sf::Color color){
