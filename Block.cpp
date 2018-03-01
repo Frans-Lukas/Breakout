@@ -1,7 +1,7 @@
 #include "Block.h"
 
 
-Block::Block(float newX, float newY, int newWidth,
+Block::Block(int newX, int newY, int newWidth,
 	int newHeight, int newLifeLeft) : 
 	Entity(newX, newY, newWidth, newHeight){
 	lifeLeft = newLifeLeft;

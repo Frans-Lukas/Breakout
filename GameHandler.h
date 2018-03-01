@@ -27,7 +27,11 @@
 class GameHandler {
 private:
 	sf::RenderWindow window;
+	
 	std::vector<Block> blocksVector;
+	std::vector<Block>::iterator blockIterator;
+	sf::RectangleShape blockRS;
+
 	std::vector<Ball> ballsVector;
 	Player *player;
 	int blockWidth;

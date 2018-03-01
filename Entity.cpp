@@ -1,14 +1,14 @@
 #include "Entity.h"
 
 
-Entity::Entity(float newX, float newY, int newWidth, int newHeight) :
+Entity::Entity(int newX, int newY, int newWidth, int newHeight) :
 		x(newX), y(newY), width(newWidth), height(newHeight){}
 
-float Entity::getX() {
+int Entity::getX() {
 	return x;
 }
 
-float Entity::getY() {
+int Entity::getY() {
 	return y;
 }
 

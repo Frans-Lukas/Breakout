@@ -16,8 +16,10 @@ GameHandler::GameHandler() {
 	//calculate size of blocks
 	blockHeight = WINDOW_HEIGHT / NUM_BLOCKS_HEIGHT;
 	blockWidth = WINDOW_WIDTH / NUM_BLOCKS_WIDTH;
+	blockRS.setSize(sf::Vector2f(blockWidth, blockHeight));
 
-	blocksVector.reserve(blockHeight * blockWidth);
+	//reserver size for blocks
+	blocksVector.reserve(NUM_BLOCKS_WIDTH * NUM_BLOCKS_HEIGHT);
 
 	//Add blocks to vector
 	for (int i = 0; i < NUM_BLOCKS_HEIGHT; i++){
@@ -49,8 +51,16 @@ void GameHandler::startGame() {
 
 //draw entities.
 void GameHandler::draw() {
-	for (int i = 0; i < 1; i++)
-	{
+	//draw blocks
+	
+	for (blockIterator = blocksVector.begin(); 
+			blockIterator != blocksVector.end(); 
+			++blockIterator){
+		
+		blockRS.setFillColor(sf::Color::Red);
+		blockRS.setPosition(blockIterator->getX, 
+							blockIterator->getY);
+		window.draw(blockRS);
 
 	}
 }
