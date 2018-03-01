@@ -29,7 +29,9 @@ private:
 	sf::RenderWindow window;
 	std::vector<Block> blocksVector;
 	std::vector<Ball> ballsVector;
-	Player* player;
+	Player *player;
+	int blockWidth;
+	int blockHeight;
 
 	static GameHandler *gameHandler_instance;
 public:

@@ -1,13 +1,32 @@
 #include "GameHandler.h"
 #include <iostream>
 
-#define WINDOW_WIDTH 200
-#define WINDOW_HEIGHT 200
+#define WINDOW_WIDTH 256
+#define WINDOW_HEIGHT 512
 #define FRAME_LIMIT 60
+#define NUM_BLOCKS_HEIGHT 16
+#define NUM_BLOCKS_WIDTH 8
+#define EASY_BLOCK_LIFE 1
 
 GameHandler::GameHandler() {
+	// init window.
 	window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "test");
 	window.setFramerateLimit(FRAME_LIMIT);
+	
+	//calculate size of blocks
+	blockHeight = WINDOW_HEIGHT / NUM_BLOCKS_HEIGHT;
+	blockWidth = WINDOW_WIDTH / NUM_BLOCKS_WIDTH;
+
+	blocksVector.reserve(blockHeight * blockWidth);
+
+	//Add blocks to vector
+	for (int i = 0; i < NUM_BLOCKS_HEIGHT; i++){
+		for (int j = 0; j < NUM_BLOCKS_WIDTH; j++){
+			Block newBlock(j*blockWidth, i*blockHeight, 
+				blockWidth, blockHeight, EASY_BLOCK_LIFE);
+			blocksVector.push_back(newBlock);
+		}
+	}
 }
 
 void GameHandler::startGame() {
