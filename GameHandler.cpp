@@ -89,9 +89,10 @@ void GameHandler::drawBalls() {
 
 //update entities.
 void GameHandler::update() {
-	for (int i = 0; i < 5; i++)
-	{
-
+	for (ballsIterator = ballsVector.begin();
+			ballsIterator != ballsVector.end();
+			++ballsIterator) {
+		ballsIterator->update();
 	}
 	player->update();
 }
@@ -121,6 +122,7 @@ void GameHandler::setUpBlockVector() {
 
 	for (int i = 0; i < NUM_BLOCKS_HEIGHT / 2; i++) {
 		for (int j = 0; j < NUM_BLOCKS_WIDTH; j++) {
+
 			Block newBlock(j*BLOCK_WIDTH, i*BLOCK_HEIGHT,
 				BLOCK_WIDTH, BLOCK_HEIGHT, EASY_BLOCK_LIFE);
 			newBlock.setColor(sf::Color(
@@ -149,7 +151,9 @@ void GameHandler::setUpBallVector() {
 	ballsVector.reserve(BALL_RESERVE);
 	Ball ball(
 		WINDOW_WIDTH / 2 - BALL_RADIUS_START / 2, 
-		WINDOW_HEIGHT / 2,
+		WINDOW_HEIGHT / 2, 
+		BALL_SPEED_START,
+		BALL_SPEED_START,
 		BALL_RADIUS_START
 	);
 	ballsVector.push_back(ball);
