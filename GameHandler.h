@@ -51,19 +51,19 @@ class GameHandler {
 private:
 	sf::RenderWindow window;
 	
-	std::vector<Block> blocksVector;
-	std::vector<Block>::iterator blockIterator;
+	std::vector<Block*> blocksVector;
+	std::vector<Block*>::iterator blockIterator;
 	sf::RectangleShape blockRS;
 
-	std::vector<Ball> ballsVector;
-	std::vector<Ball>::iterator ballsIterator;
+	std::vector<Ball*> ballsVector;
+	std::vector<Ball*>::iterator ballsIterator;
 	sf::CircleShape ballCS;
 
 	Player *player;
 	sf::RectangleShape playerRS;
 
-	std::vector<Entity> entityVector;
-	std::vector<Entity>::iterator entityIterator;
+	std::vector<Entity*> entityVector;
+	std::vector<Entity*>::iterator entityIterator;
 
 	static GameHandler *gameHandler_instance;
 

@@ -12,4 +12,5 @@ public:
 	sf::Color getColor();
 	void setColor(sf::Color color);
 	void decrementLifeLeft();
+	void callCollide() override;
 };

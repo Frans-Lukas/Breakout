@@ -1,5 +1,5 @@
 #include "Block.h"
-
+#include <iostream>
 
 Block::Block(int newX, int newY, int newWidth,
 	int newHeight, int newLifeLeft) : 
@@ -20,8 +20,12 @@ void Block::setColor(sf::Color color){
 	this->color = color;
 }
 
-void Block::decrementLifeLeft()
-{
+void Block::decrementLifeLeft(){
 	lifeLeft--;
+	std::cout << "lifeLeft " << lifeLeft << std::endl;
+}
+
+void Block::callCollide() {
+	decrementLifeLeft();
 }
 

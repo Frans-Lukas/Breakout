@@ -1,6 +1,11 @@
 #include "GameHandler.h"
 #include <iostream>
 
+
+Ball *ballPointer;
+
+using namespace std;
+
 GameHandler::GameHandler() {
 	// init window.
 	window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "test");
@@ -10,6 +15,7 @@ GameHandler::GameHandler() {
 	setUpBlockVector();
 	setUpPlayer();
 	setUpBallVector();
+
 }
 
 void GameHandler::startGame() {
@@ -56,9 +62,9 @@ void GameHandler::drawBlocks() {
 			blockIterator != blocksVector.end();
 			++blockIterator) {
 		drawRectangle(
-			blockIterator->getColor(), 
-			blockIterator->getX(),
-			blockIterator->getY(),
+			(*blockIterator)->getColor(), 
+			(*blockIterator)->getX(),
+			(*blockIterator)->getY(),
 			blockRS
 		);
 	}
@@ -77,10 +83,10 @@ void GameHandler::drawBalls() {
 		++ballsIterator) {
 
 		ballCS.setPosition(
-			ballsIterator->getX(), 
-			ballsIterator->getY()
+			(*ballsIterator)->getX(), 
+			(*ballsIterator)->getY()
 		);
-
+		window.draw(blockRS);
 		window.draw(ballCS);
 
 	}
@@ -91,33 +97,53 @@ void GameHandler::drawBalls() {
 void GameHandler::update() {
 
 	//check for collision between all entities;
+
 	for (entityIterator = entityVector.begin();
 		entityIterator != entityVector.end();
-		++entityIterator) {
-		std::vector<Entity>::iterator secondIterator;
-		for (secondIterator = entityIterator + 1;
+		entityIterator++) {
+		std::vector<Entity*>::iterator secondIterator = entityIterator;
+		for (++secondIterator;
 			secondIterator != entityVector.end();
-			++secondIterator) {
-
-			if (isColliding(*entityIterator, *secondIterator)){
-				entityIterator->callCollide();
-				secondIterator->callCollide();
+			secondIterator++) {
+			
+			if (isColliding(**entityIterator, **secondIterator)){
+				(*entityIterator)->callCollide();
+				(*secondIterator)->callCollide();
 			}
 				
 		}
 	}
 
 	for (ballsIterator = ballsVector.begin();
+		ballsIterator != ballsVector.end();
+		ballsIterator++) {
+		if ((*ballsIterator)->getX() + BALL_RADIUS_START * 2 > WINDOW_WIDTH ||
+			(*ballsIterator)->getX() < 0) {
+			(*ballsIterator)->callCollide();
+		}
+	}
+
+
+	/*for (blockIterator = blocksVector.begin(); 
+		blockIterator != blocksVector.end(); blockIterator++) {
+
+		if ((*blockIterator)->getLifeLeft() <= 0) {
+			blockIterator = blocksVector.erase(blockIterator);
+		}
+
+	}*/
+
+	for (ballsIterator = ballsVector.begin();
 			ballsIterator != ballsVector.end();
 			++ballsIterator) {
-		ballsIterator->update();
+		(*ballsIterator)->update();
 	}
 	player->update();
 }
 
 bool GameHandler::isColliding(Entity rect1, Entity rect2) {
 	return rect1.getX() < rect2.getX() + rect2.getWidth() &&
-		rect1.getX() + rect1.getWidth() > rect2.getX() &&
+		rect1.getX() + rect1.getWidth()  / 2 > rect2.getX() &&
 		rect1.getY() < rect2.getY() + rect2.getHeight() &&
 		rect1.getHeight() + rect1.getY() > rect2.getY();
 }
@@ -148,9 +174,9 @@ void GameHandler::setUpBlockVector() {
 	for (int i = 0; i < NUM_BLOCKS_HEIGHT / 2; i++) {
 		for (int j = 0; j < NUM_BLOCKS_WIDTH; j++) {
 
-			Block newBlock(j*BLOCK_WIDTH, i*BLOCK_HEIGHT,
+			Block *newBlock = new Block(j*BLOCK_WIDTH, i*BLOCK_HEIGHT,
 				BLOCK_WIDTH, BLOCK_HEIGHT, EASY_BLOCK_LIFE);
-			newBlock.setColor(sf::Color(
+			newBlock->setColor(sf::Color(
 				(RGB_MAX_COLOR / NUM_BLOCKS_HEIGHT * i),
 				(RGB_MAX_COLOR / NUM_BLOCKS_WIDTH * j),
 				(RGB_MAX_COLOR / (NUM_BLOCKS_WIDTH + NUM_BLOCKS_HEIGHT) * (i + j))
@@ -170,19 +196,23 @@ void GameHandler::setUpPlayer() {
 	playerRS.setSize(sf::Vector2f(
 		player->getWidth(), 
 		player->getHeight()));
-	entityVector.push_back(*player);
+	entityVector.push_back(player);
 
 }
 
 void GameHandler::setUpBallVector() {
 	ballsVector.reserve(BALL_RESERVE);
-	Ball ball(
+	Ball *ball = new Ball(
 		WINDOW_WIDTH / 2 - BALL_RADIUS_START / 2, 
 		WINDOW_HEIGHT / 2, 
 		BALL_SPEED_START,
 		BALL_SPEED_START,
 		BALL_RADIUS_START
 	);
+	ballPointer = ball;
+	cout << ballPointer->getX() << endl;
+
+
 	ballsVector.push_back(ball);
 	entityVector.push_back(ball);
 
