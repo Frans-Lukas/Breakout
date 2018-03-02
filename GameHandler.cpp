@@ -48,8 +48,6 @@ void GameHandler::startGame() {
 void GameHandler::draw() {
 	
 	//draw blocks
-	
-	
 	drawBlocks();
 	drawBalls();
 	
@@ -97,6 +95,7 @@ void GameHandler::update() {
 	{
 
 	}
+	player->update();
 }
 
 GameHandler* GameHandler::gameHandler_instance = 0;
