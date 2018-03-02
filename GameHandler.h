@@ -62,6 +62,9 @@ private:
 	Player *player;
 	sf::RectangleShape playerRS;
 
+	std::vector<Entity> entityVector;
+	std::vector<Entity>::iterator entityIterator;
+
 	static GameHandler *gameHandler_instance;
 
 	void setUpBlockVector();

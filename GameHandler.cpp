@@ -89,6 +89,24 @@ void GameHandler::drawBalls() {
 
 //update entities.
 void GameHandler::update() {
+
+	//check for collision between all entities;
+	for (entityIterator = entityVector.begin();
+		entityIterator != entityVector.end();
+		++entityIterator) {
+		std::vector<Entity>::iterator secondIterator;
+		for (secondIterator = entityIterator + 1;
+			secondIterator != entityVector.end();
+			++secondIterator) {
+
+			if (isColliding(*entityIterator, *secondIterator)){
+				entityIterator->callCollide();
+				secondIterator->callCollide();
+			}
+				
+		}
+	}
+
 	for (ballsIterator = ballsVector.begin();
 			ballsIterator != ballsVector.end();
 			++ballsIterator) {
@@ -97,8 +115,11 @@ void GameHandler::update() {
 	player->update();
 }
 
-bool GameHandler::isColliding(Entity e1, Entity e2) {
-	return false;
+bool GameHandler::isColliding(Entity rect1, Entity rect2) {
+	return rect1.getX() < rect2.getX() + rect2.getWidth() &&
+		rect1.getX() + rect1.getWidth() > rect2.getX() &&
+		rect1.getY() < rect2.getY() + rect2.getHeight() &&
+		rect1.getHeight() + rect1.getY() > rect2.getY();
 }
 
 GameHandler* GameHandler::gameHandler_instance = 0;
@@ -136,6 +157,7 @@ void GameHandler::setUpBlockVector() {
 			)
 			);
 			blocksVector.push_back(newBlock);
+			entityVector.push_back(newBlock);
 		}
 	}
 }
@@ -148,6 +170,8 @@ void GameHandler::setUpPlayer() {
 	playerRS.setSize(sf::Vector2f(
 		player->getWidth(), 
 		player->getHeight()));
+	entityVector.push_back(*player);
+
 }
 
 void GameHandler::setUpBallVector() {
@@ -160,6 +184,7 @@ void GameHandler::setUpBallVector() {
 		BALL_RADIUS_START
 	);
 	ballsVector.push_back(ball);
+	entityVector.push_back(ball);
 
 	ballCS.setRadius(BALL_RADIUS_START);
 	ballCS.setFillColor(sf::Color::White);

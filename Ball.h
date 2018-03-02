@@ -14,4 +14,5 @@ public:
 	void setRadius(float radius);
 	float getRadius();
 	void update();
+	void callCollide() override;
 };

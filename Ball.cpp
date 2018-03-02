@@ -11,7 +11,8 @@ Ball::Ball(int newX, int newY,
 
 void Ball::setRadius(float radius) {
 	this->radius = radius;
-	this->width
+	this->width = radius * 2;
+	this->height = radius * 2;
 }
 
 float Ball::getRadius() {
@@ -21,4 +22,9 @@ float Ball::getRadius() {
 void Ball::update() {
 	setX(getX() + xSpeed);
 	setY(getY() + ySpeed);
+}
+
+void Ball::callCollide() {
+	xSpeed = -xSpeed;
+	ySpeed = -ySpeed;
 }
