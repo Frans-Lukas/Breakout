@@ -2,8 +2,9 @@
 
 Ball::Ball(int newX, int newY, 
 		int xSpeed, int ySpeed,
+		int width, int height,
 		float radius) : 
-		Entity(newX, newY, 0, 0){
+		Entity(newX, newY, width, height){
 	this->xSpeed = xSpeed;
 	this->ySpeed = ySpeed;
 	this->radius = radius;

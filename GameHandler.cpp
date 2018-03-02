@@ -97,6 +97,10 @@ void GameHandler::update() {
 	player->update();
 }
 
+bool GameHandler::isColliding(Entity e1, Entity e2) {
+	return false;
+}
+
 GameHandler* GameHandler::gameHandler_instance = 0;
 
 GameHandler* GameHandler::getInstance() {
@@ -137,7 +141,6 @@ void GameHandler::setUpBlockVector() {
 }
 
 void GameHandler::setUpPlayer() {
-
 	player = new Player(WINDOW_WIDTH / 2 - PLAYER_WIDTH / 2, 
 		PLAYER_START_Y,
 		PLAYER_WIDTH, 
@@ -154,6 +157,8 @@ void GameHandler::setUpBallVector() {
 		WINDOW_HEIGHT / 2, 
 		BALL_SPEED_START,
 		BALL_SPEED_START,
+		BALL_RADIUS_START * 2,
+		BALL_RADIUS_START * 2,
 		BALL_RADIUS_START
 	);
 	ballsVector.push_back(ball);

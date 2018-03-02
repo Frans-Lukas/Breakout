@@ -23,4 +23,5 @@ public:
 	int getHeight();
 	void setX(int newX);
 	void setY(int newY);
+	void callCollide();
 };

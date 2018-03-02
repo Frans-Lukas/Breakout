@@ -10,6 +10,7 @@ private:
 public:
 	Ball(int newX, int newY, 
 		int xSpeed, int ySpeed,
+		int width, int height,
 		float radius);
 	void setRadius(float radius);
 	float getRadius();

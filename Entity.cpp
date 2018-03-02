@@ -28,3 +28,6 @@ void Entity::setY(int newY)
 {
 	y = newY;
 }
+
+void Entity::callCollide() {
+}

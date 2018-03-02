@@ -78,6 +78,7 @@ public:
 	void startGame();
 	void draw();
 	void update();
+	bool isColliding(Entity e1, Entity e2);
 	static GameHandler *getInstance();
 	virtual ~GameHandler();
 };
