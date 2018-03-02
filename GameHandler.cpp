@@ -157,8 +157,6 @@ void GameHandler::setUpBallVector() {
 		WINDOW_HEIGHT / 2, 
 		BALL_SPEED_START,
 		BALL_SPEED_START,
-		BALL_RADIUS_START * 2,
-		BALL_RADIUS_START * 2,
 		BALL_RADIUS_START
 	);
 	ballsVector.push_back(ball);

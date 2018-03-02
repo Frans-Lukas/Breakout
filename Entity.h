@@ -8,12 +8,11 @@
 
 
 class Entity {
-private:
+protected:
+	int width;
+	int height; 
 	int x;
 	int y;
-	int width;
-	int height;
-
 public:
 	Entity(int newX, int newY, int newWidth, int newHeight);
 	Entity() = default;
