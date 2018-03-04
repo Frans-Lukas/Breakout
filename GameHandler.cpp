@@ -86,7 +86,6 @@ void GameHandler::drawBalls() {
 			(*ballsIterator)->getX(), 
 			(*ballsIterator)->getY()
 		);
-		window.draw(blockRS);
 		window.draw(ballCS);
 
 	}
@@ -124,14 +123,12 @@ void GameHandler::update() {
 	}
 
 
-	/*for (blockIterator = blocksVector.begin(); 
+	for (blockIterator = blocksVector.begin(); 
 		blockIterator != blocksVector.end(); blockIterator++) {
-
 		if ((*blockIterator)->getLifeLeft() <= 0) {
 			blockIterator = blocksVector.erase(blockIterator);
 		}
-
-	}*/
+	}
 
 	for (ballsIterator = ballsVector.begin();
 			ballsIterator != ballsVector.end();
@@ -177,9 +174,9 @@ void GameHandler::setUpBlockVector() {
 			Block *newBlock = new Block(j*BLOCK_WIDTH, i*BLOCK_HEIGHT,
 				BLOCK_WIDTH, BLOCK_HEIGHT, EASY_BLOCK_LIFE);
 			newBlock->setColor(sf::Color(
-				(RGB_MAX_COLOR / NUM_BLOCKS_HEIGHT * i),
-				(RGB_MAX_COLOR / NUM_BLOCKS_WIDTH * j),
-				(RGB_MAX_COLOR / (NUM_BLOCKS_WIDTH + NUM_BLOCKS_HEIGHT) * (i + j))
+				((NUM_BLOCKS_HEIGHT * i )% RGB_MAX_COLOR),
+				((NUM_BLOCKS_WIDTH * j) % RGB_MAX_COLOR),
+				(((NUM_BLOCKS_HEIGHT * i) + (j + NUM_BLOCKS_WIDTH)) % RGB_MAX_COLOR)
 			)
 			);
 			blocksVector.push_back(newBlock);
@@ -210,7 +207,6 @@ void GameHandler::setUpBallVector() {
 		BALL_RADIUS_START
 	);
 	ballPointer = ball;
-	cout << ballPointer->getX() << endl;
 
 
 	ballsVector.push_back(ball);
