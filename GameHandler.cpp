@@ -97,17 +97,17 @@ void GameHandler::update() {
 
 	//check for collision between all entities;
 
-	for (entityIterator = entityVector.begin();
-		entityIterator != entityVector.end();
-		entityIterator++) {
+	for (blockIterator = blocksVector.begin();
+		blockIterator != blocksVector.end(); blockIterator++) {
+		if (isColliding(**blockIterator, *ballPointer)) {
+			(*blockIterator)->callCollide(*ballPointer);
 
-		if (isColliding(**entityIterator, *ballPointer)){
-			(*entityIterator)->callCollide(*ballPointer);
-
-			(ballPointer)->callCollide(**entityIterator);
+			(ballPointer)->callCollide(**blockIterator);
 		}
-				
-		
+	}
+
+	if (isColliding(*player, *ballPointer)) {
+		ballPointer->callCollide(*ballPointer);
 	}
 
 	for (ballsIterator = ballsVector.begin();
@@ -122,9 +122,12 @@ void GameHandler::update() {
 
 	for (blockIterator = blocksVector.begin(); 
 		blockIterator != blocksVector.end(); blockIterator++) {
+
 		if ((*blockIterator)->getLifeLeft() <= 0) {
+			
 			blockIterator = blocksVector.erase(blockIterator);
 		}
+
 	}
 
 	for (ballsIterator = ballsVector.begin();
@@ -132,6 +135,8 @@ void GameHandler::update() {
 			++ballsIterator) {
 		(*ballsIterator)->update();
 	}
+
+
 	player->update();
 }
 
