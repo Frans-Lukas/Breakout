@@ -24,7 +24,7 @@ void Ball::update() {
 	setY(getY() + ySpeed);
 }
 
-void Ball::callCollide() {
+void Ball::callCollide(Entity collidingEntity) {
 	ySpeed = -ySpeed;
 	if (ySpeed < 0) {
 		xSpeed = -xSpeed;

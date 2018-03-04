@@ -29,5 +29,5 @@ void Entity::setY(int newY)
 	y = newY;
 }
 
-void Entity::callCollide() {
+void Entity::callCollide(Entity collidingEntity) {
 }

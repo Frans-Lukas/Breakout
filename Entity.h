@@ -22,5 +22,5 @@ public:
 	int getHeight();
 	void setX(int newX);
 	void setY(int newY);
-	virtual void callCollide();
+	virtual void callCollide(Entity collidingEntity);
 };

@@ -25,7 +25,7 @@ void Block::decrementLifeLeft(){
 	std::cout << "lifeLeft " << lifeLeft << std::endl;
 }
 
-void Block::callCollide() {
+void Block::callCollide(Entity collidingEntity) {
 	decrementLifeLeft();
 }
 

@@ -100,17 +100,14 @@ void GameHandler::update() {
 	for (entityIterator = entityVector.begin();
 		entityIterator != entityVector.end();
 		entityIterator++) {
-		std::vector<Entity*>::iterator secondIterator = entityIterator;
-		for (++secondIterator;
-			secondIterator != entityVector.end();
-			secondIterator++) {
-			
-			if (isColliding(**entityIterator, **secondIterator)){
-				(*entityIterator)->callCollide();
-				(*secondIterator)->callCollide();
-			}
-				
+
+		if (isColliding(**entityIterator, *ballPointer)){
+			(*entityIterator)->callCollide(*ballPointer);
+
+			(ballPointer)->callCollide(**entityIterator);
 		}
+				
+		
 	}
 
 	for (ballsIterator = ballsVector.begin();
@@ -118,7 +115,7 @@ void GameHandler::update() {
 		ballsIterator++) {
 		if ((*ballsIterator)->getX() + BALL_RADIUS_START * 2 > WINDOW_WIDTH ||
 			(*ballsIterator)->getX() < 0) {
-			(*ballsIterator)->callCollide();
+			(*ballsIterator)->callCollide(**ballsIterator);
 		}
 	}
 
@@ -157,9 +154,6 @@ GameHandler* GameHandler::getInstance() {
 GameHandler::~GameHandler()
 {
 }
-
-
-
 
 void GameHandler::setUpBlockVector() {
 	//calculate size of blocks
@@ -210,7 +204,7 @@ void GameHandler::setUpBallVector() {
 
 
 	ballsVector.push_back(ball);
-	entityVector.push_back(ball);
+	//entityVector.push_back(ball);
 
 	ballCS.setRadius(BALL_RADIUS_START);
 	ballCS.setFillColor(sf::Color::White);
