@@ -22,7 +22,6 @@ void Block::setColor(sf::Color color){
 
 void Block::decrementLifeLeft(){
 	lifeLeft--;
-	std::cout << "lifeLeft " << lifeLeft << std::endl;
 }
 
 void Block::callCollide(Entity collidingEntity) {

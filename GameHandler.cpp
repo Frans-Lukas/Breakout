@@ -113,9 +113,16 @@ void GameHandler::update() {
 	for (ballsIterator = ballsVector.begin();
 		ballsIterator != ballsVector.end();
 		ballsIterator++) {
-		if ((*ballsIterator)->getX() + BALL_RADIUS_START * 2 > WINDOW_WIDTH ||
+
+		if ((*ballsIterator)->getX() + 
+			BALL_RADIUS_START * 2 > WINDOW_WIDTH ||
 			(*ballsIterator)->getX() < 0) {
-			(*ballsIterator)->callCollide(**ballsIterator);
+
+			(*ballsIterator)->setXSpeed(-(*ballsIterator)->getXSpeed());
+		}
+
+		if ((*ballsIterator)->getY() <= 0) {
+			(*ballsIterator)->setYSpeed(-(*ballsIterator)->getYSpeed());
 		}
 	}
 
@@ -126,6 +133,7 @@ void GameHandler::update() {
 		if ((*blockIterator)->getLifeLeft() <= 0) {
 			
 			blockIterator = blocksVector.erase(blockIterator);
+			break;
 		}
 
 	}
@@ -142,7 +150,7 @@ void GameHandler::update() {
 
 bool GameHandler::isColliding(Entity rect1, Entity rect2) {
 	return rect1.getX() < rect2.getX() + rect2.getWidth() &&
-		rect1.getX() + rect1.getWidth()  / 2 > rect2.getX() &&
+		rect1.getX() + rect1.getWidth() > rect2.getX() &&
 		rect1.getY() < rect2.getY() + rect2.getHeight() &&
 		rect1.getHeight() + rect1.getY() > rect2.getY();
 }

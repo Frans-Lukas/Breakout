@@ -34,3 +34,19 @@ void Ball::callCollide(Entity collidingEntity) {
 	}
 
 }
+
+int Ball::getXSpeed() {
+	return xSpeed;
+}
+
+int Ball::getYSpeed() {
+	return ySpeed;
+}
+
+void Ball::setXSpeed(int xSpeed) {
+	this->xSpeed = xSpeed;
+}
+
+void Ball::setYSpeed(int ySpeed) {
+	this->ySpeed = ySpeed;
+}

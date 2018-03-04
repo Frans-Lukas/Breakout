@@ -15,4 +15,8 @@ public:
 	float getRadius();
 	void update();
 	void callCollide(Entity collidingEntity) override;
+	int getXSpeed();
+	int getYSpeed();
+	void setXSpeed(int xSpeed);
+	void setYSpeed(int ySpeed);
 };
