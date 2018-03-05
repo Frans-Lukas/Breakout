@@ -15,7 +15,6 @@ GameHandler::GameHandler() {
 	setUpBlockVector();
 	setUpPlayer();
 	setUpBallVector();
-
 }
 
 void GameHandler::startGame() {
@@ -164,8 +163,22 @@ GameHandler* GameHandler::getInstance() {
 	return gameHandler_instance;
 }
 
-GameHandler::~GameHandler()
-{
+GameHandler::~GameHandler() {
+	for (blockIterator = blocksVector.begin();
+		blockIterator != blocksVector.end(); blockIterator++) {
+		delete *blockIterator;
+	}
+	delete ballPointer;
+	delete player;
+	playerRS.~RectangleShape();
+	ballCS.~CircleShape();
+	blockRS.~blockRS();
+	
+
+	cerr << "Delete complete" << endl;
+	
+
+	delete gameHandler_instance;
 }
 
 void GameHandler::setUpBlockVector() {
